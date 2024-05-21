@@ -38,7 +38,7 @@
 |内存|32G|32G|
 |显卡|NVIDIA RTX 4070|NVIDIA RTX 4070|
 ### 1.2 软件环境
-[panosim-autoware](https://gitee.com/wobuzhuchele/panosim-autoware/tree/v1.0) 含联合仿真所需的通讯脚本、地图资源以及 Autoware 代码。
+[panosim-autoware](https://gitee.com/wobuzhuchele/panosim-autoware/tree/master) 含联合仿真所需的通讯脚本、地图资源以及 Autoware 代码。
 
 ### 1.3 软件架构
 1.3.1 SIL

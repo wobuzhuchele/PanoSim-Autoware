@@ -10,7 +10,7 @@ panosim-autoware 中 autoware 的部分文件进行修改，可根据具体情�
 1.2 下载 PanoSim-Autoware/Autoware 文件
 - 1.2.1 克隆 `panosim-autoware`
   ```
-  git clone https://gitee.com/wobuzhuchele/panosim-autoware.git -b -v1.0
+  git clone https://gitee.com/wobuzhuchele/panosim-autoware.git 
   cd  panosim-autoware/Autoware   
   ```
 - 1.2.2 如果您是第一次安装Autoware，您可以使用提供的Ansible脚本自动安装依赖项。
