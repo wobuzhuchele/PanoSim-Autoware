@@ -5,17 +5,17 @@ PanoSim和Autoware联合仿真教程。基于PanoSim V32和Autoware.universe版�
 
 ## 目录说明
 
-Autoware：Autoware.universe源码  
-Autoware_Bridge: PanoSim和AutoWare仿真通讯中间件  
-Document：操作教程文档  
-PanoSim_Msg: 联合仿真通讯msg  
-PanoSimDateBase: PanoSim仿真地图场景  
+1. Autoware：Autoware.universe源码  
+2. Autoware_Bridge: PanoSim和AutoWare仿真通讯中间件  
+3. Document：操作教程文档  
+4. PanoSim_Msg: 联合仿真通讯msg  
+5. PanoSimDateBase: PanoSim仿真地图场景  
 
 
 ## 使用说明
 
 1.  [PanoSim-Autoware总体框架介绍](Document/PanoSim-Autoware.md)
-2.  [联合仿真-PanoSim端配置教程](Document/PanoSim-Autoware%PanoSim%20配置.md),[RO2配置教程](Document/ROS2%20Bridge.md)
+2.  [联合仿真-PanoSim端配置教程](Document/PanoSim-Autoware%20PanoSim%20配置.md),[RO2配置教程](Document/ROS2%20Bridge.md)
 3.  [联合仿真-Autoware端配置教程](Document/PanoSim-Autoware%20Autoware%20配置.md)
    
 
