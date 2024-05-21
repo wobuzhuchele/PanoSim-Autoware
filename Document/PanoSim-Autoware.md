@@ -42,9 +42,9 @@
 
 ### 1.3 软件架构
 1.3.1 SIL
-![alt text](image/PanoSim-Autoware/纯仿真.png)
+![alt text](image/PanoSim-Autoware/SIL.png)
 1.3.2 VIL
-![alt text](image/PanoSim-Autoware/接入小车.png)
+![alt text](image/PanoSim-Autoware/VIL.png)
 ## 2. ROS2 Bridge 
 ### 2.1 完成 ROS2 Bridge 环境部署
 [ROS2 Bridge](./ROS2%20Bridge.md)

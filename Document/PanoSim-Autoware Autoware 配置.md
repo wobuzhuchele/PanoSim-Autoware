@@ -32,9 +32,9 @@ panosim-autoware 中 autoware 的部分文件进行修改，可根据具体情�
   ```
 ## 2. 联合仿真资源加载
 2.1 地图下载
-- [PanoTown]()
-- [PanoTown01]()
-- [chuangxinyuan]()
+- [PanoTown](https://drive.google.com/file/d/1H6Bdx-QbLdIBiI6EwKdDeeo2LmG82I80/view?usp=drive_link)
+- [PanoTown01](https://drive.google.com/file/d/1FN79dmM9l_ufJIrOvu5NuICYLoZ5060m/view)
+- [chuangxinyuan](https://drive.google.com/file/d/1AWFO6FQ2ia-yhUB0EP-1OJPtOVEUhJkv/view?usp=drive_link)
   
 2.2 将下载的地图文件解压到 `~/autoware_map/` 下
 ![1715708196822](image/PanoSim-Autoware%20Autoware/1715708196822.png)
