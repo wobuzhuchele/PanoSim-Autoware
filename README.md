@@ -25,5 +25,5 @@ PanoSim和Autoware联合仿真教程。基于PanoSim V32和Autoware.universe版�
 
 
 ## 版权
-浙江天行健智能科技 版权所有 © Copyright 2024 [PanoSim](https://www.panosim.com), Inc.  
+
 许可证遵循 [Apache License 2.0协议]. 更多细节请访问 [LICENSE](https://gitee.com/wobuzhuchele/panosim-autoware/blob/master/Autoware/LICENSE).
