@@ -37,8 +37,8 @@ panosim-autoware 中 autoware 的部分文件进行修改，可根据具体情�
 -  chuangxinyuan：[百度网盘](https://pan.baidu.com/s/14bX6O24nJ-nGEoK_T7bHwQ?pwd=6666) ,[Google网盘](https://drive.google.com/file/d/1AWFO6FQ2ia-yhUB0EP-1OJPtOVEUhJkv/view?usp=drive_link)
   
 2.2 将下载的地图文件解压到 `~/autoware_map/` 下
-![1715708196822](image/PanoSim-Autoware%20Autoware/1715708196822.png)
+![1715708196822](https://gitee.com/wobuzhuchele/panosim-autoware/raw/master/Document/image/PanoSim-AutoWare%20Autoware/1715708196822.png)
 PanoSimTown文件结构(例)
-![1715708226880](image/PanoSim-Autoware%20Autoware/1715708226880.png)
+![1715708226880](https://gitee.com/wobuzhuchele/panosim-autoware/raw/master/Document/image/PanoSim-AutoWare%20Autoware/1715708226880.png)
 
 >[跳转到 PanoSim-AutoWare](./PanoSim-Autoware.md)
