@@ -1,4 +1,13 @@
 # encoding: utf-8
+#
+# Copyright (c) 2019 Intel Corporation
+#
+# This work is licensed under the terms of the MIT license.
+# For a copy, see <https://opensource.org/licenses/MIT>.
+
+
+
+
 from Init_ROS2 import *
 ros2 = winros2()
 ros2.init()
@@ -8,7 +17,7 @@ from rclpy.qos import *
 from rclpy.node import Node
 from DataInterfacePython import *
 from autoware_auto_control_msgs.msg import AckermannControlCommand
-from simple_pid import PID  # pylint: disable=import-error,wrong-import-order
+from simple_pid import PID  
 import ego_control_physics as phys
 from rclpy.node import Node
 import numpy
@@ -229,7 +238,6 @@ class PanoSimAckermannControl(Node):
         self.info.restrictions.max_accel = phys.get_vehicle_max_acceleration(self.vehicle_info)
         self.info.restrictions.max_decel = phys.get_vehicle_max_deceleration(self.vehicle_info)
         self.info.restrictions.min_accel = 1.
-        # clipping the pedal in both directions to the same range using the usual lower border: the max_accel to ensure the the pedal target is in symmetry to zero
         self.info.restrictions.max_pedal = min(self.info.restrictions.max_accel, self.info.restrictions.max_decel)
 
     def get_time(self):
@@ -284,15 +292,10 @@ class PanoSimAckermannControl(Node):
         """
         Handle stop and switching to reverse gear
         """
-        # from this velocity on it is allowed to switch to reverse gear
         standing_still_epsilon = 0.1
-        # from this velocity on hand brake is turned on
         full_stop_epsilon = 0.00001
-
-        # auto-control of hand-brake and reverse gear
         self.info.output.hand_brake = False
         if self.info.current.speed_abs < standing_still_epsilon:
-            # standing still, change of driving direction allowed
             self.info.status.status = "standing"
             if self.info.target.speed < 0:
                 if not self.info.output.reverse:
@@ -319,20 +322,6 @@ class PanoSimAckermannControl(Node):
     def run_speed_control_loop(self):
         """
         Run the PID control loop for the speed
-
-        The speed control is only activated if desired acceleration is moderate
-        otherwhise we try to follow the desired acceleration values
-        Reasoning behind:
-
-        An autonomous vehicle calculates a trajectory including position and velocities.
-        The ackermann drive is derived directly from that trajectory.
-        The acceleration and jerk values provided by the ackermann drive command
-        reflect already the speed profile of the trajectory.
-        It makes no sense to try to mimick this a-priori knowledge by the speed PID
-        controller.
-        =>
-        The speed controller is mainly responsible to keep the speed.
-        On expected speed changes, the speed control loop is disabled
         """
         epsilon = 0.00001
         target_accel_abs = abs(self.info.target.accel)
@@ -366,12 +355,8 @@ class PanoSimAckermannControl(Node):
         """
         Run the PID control loop for the acceleration
         """
-        # setpoint of the acceleration controller is the output of the speed controller
         self.accel_controller.setpoint = self.info.status.speed_control_accel_target
         self.info.status.accel_control_pedal_delta = float(self.accel_controller(self.info.current.accel))
-        # @todo: we might want to scale by making use of the the abs-jerk value
-        # If the jerk input is big, then the trajectory input expects already quick changes
-        # in the acceleration; to respect this we put an additional proportional factor on top
         self.info.status.accel_control_pedal_target = numpy.clip(self.info.status.accel_control_pedal_target +self.info.status.accel_control_pedal_delta,\
             -self.info.restrictions.max_pedal, self.info.restrictions.max_pedal)
 
@@ -379,30 +364,19 @@ class PanoSimAckermannControl(Node):
         """
         Apply the current speed_control_target value to throttle/brake commands
         """
-        # the driving impedance moves the 'zero' acceleration border
-        # Interpretation: To reach a zero acceleration the throttle has to pushed down for a certain amount
         self.info.status.throttle_lower_border = phys.get_vehicle_driving_impedance_acceleration(self.info.current.speed,self.vehicle_info)
-        # the engine lay off acceleration defines the size of the coasting area
-        # Interpretation: The engine already prforms braking on its own;
-        #  therefore pushing the brake is not required for small decelerations
         self.info.status.brake_upper_border = self.info.status.throttle_lower_border + \
             phys.get_vehicle_lay_off_engine_acceleration(self.vehicle_info)
         
         if self.info.status.accel_control_pedal_target > self.info.status.throttle_lower_border:
             self.info.status.status = "accelerating"
             self.info.output.brake = 0.0
-            # the value has to be normed to max_pedal
-            # be aware: is not required to take throttle_lower_border into the scaling factor, because that border is in reality a shift of the coordinate system
-            # the global maximum acceleration can practically not be reached anymore because of driving impedance
             self.info.output.throttle = ((self.info.status.accel_control_pedal_target -self.info.status.throttle_lower_border) / abs(self.info.restrictions.max_pedal))
 
         else: 
             self.info.status.status = "braking"
-            # braking required
             self.info.output.brake = ((self.info.status.brake_upper_border -self.info.status.accel_control_pedal_target) / abs(self.info.restrictions.max_pedal))
             self.info.output.throttle = 0.0
-
-        # finally clip the final control output (should actually never happen)
         self.info.output.brake = numpy.clip(self.info.output.brake, 0., 1.)
         self.info.output.throttle = numpy.clip(self.info.output.throttle, 0., 1.)
         self.bus_ego_throttle.writeHeader(*(self.ts,1,self.info.output.throttle))
