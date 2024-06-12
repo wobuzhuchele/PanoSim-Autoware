@@ -15,7 +15,7 @@ PanoSim和Autoware联合仿真教程。基于PanoSim V32和Autoware.universe版�
 ## 使用说明
 
 1.  [PanoSim-Autoware总体框架介绍](Document/PanoSim-Autoware.md)
-2.  [联合仿真-PanoSim端配置教程](Document/PanoSim-Autoware%20PanoSim%20配置.md),[RO2配置教程](Document/ROS2%20Bridge.md)
+2.  [联合仿真-PanoSim端配置教程](Document/PanoSim-Autoware%20PanoSim%20配置.md),[ROS2配置教程](Document/ROS2%20Bridge.md)
 3.  [联合仿真-Autoware端配置教程](Document/PanoSim-Autoware%20Autoware%20配置.md)
    
 
